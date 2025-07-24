@@ -1,13 +1,33 @@
-public int[] twoSum(int[] nums, int target) {
-        int[] arr=new int[2];
-        for(int i=0;i<nums.length-1;i++){
-            for(int j=i+1;j<nums.length;j++){
-                if(nums[i]+nums[j]==target){
-                    arr[0]=i;
-                    arr[1]=j;
+class Solution {
+    public int threeSumClosest(int[] nums, int target) {
+        int sum=0,diff=0 ,result=0,i,j,k,tempDiff;
+        for(i=0;i<nums.length-2;i++){
+            for(j=i+1;j<nums.length-1;j++){
+                for(k=j+1;k<nums.length;k++){
+                    sum=nums[i]+nums[j]+nums[k];
+                    if(sum==target){
+                        result=sum;
+                        break;
+                    }
+                    tempDiff=Math.abs(target-sum);
+                    if(diff==0){
+                        diff=tempDiff;
+                        result=sum;
+                        continue;
+                    }
+                    if(diff>tempDiff){
+                        diff=tempDiff;
+                        result=sum;
+                    }
+                }
+                if(sum==target){
                     break;
                 }
             }
+            if(sum==target){
+                break;
+            }
         }
-        return arr;
+        return result;
     }
+}
